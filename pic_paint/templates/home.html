@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Paint it!</title>
+{% load static %} 
+<link rel='stylesheet' type='text/css' href="{% static 'css/styles.css' %}">
+<script type="text/javascript" src= "{% static 'js/jquery_min.js' %}"> </script>
+<script type="text/javascript" src= "{% static 'js/bpopup_min.js' %}"> </script>
+</head>
+<body>
+<div id="tool_box">
+  <div id="drw_tools">
+    <button id="line" class="btns" title="Line">
+      <img src="{% static "pics/line.png" %}"/></button>
+    <button id="pencil" class="btns" title="Pencil">
+      <img src="{% static "pics/pencil.png" %}"/></button>
+    <button id="rect" class="btns" title="Rectangle">
+      <img src="{% static "pics/rectangle.png" %}"/></button>
+    <button id="circle" class="btns" title="Circle">
+      <img src="{% static "pics/circle.png" %}"/></button>
+    <button id="eraser" class="btns" title="Eraser">
+      <img src="{% static "pics/eraser.png" %}"/></button>
+  </div>
+  <div id="colorset">
+    <div id="fill_row">
+      Fill<input type="checkbox" id="fill"/>
+    </div>
+    <div id="outline_row">
+      Outline<input type="checkbox" id="outline" checked="checked"/>
+      <select id="thick">
+       <option value=2 selected>2px</option> <option value=6 >6px</option> 
+       <option value=10>10px</option> <option value=12 >12px</option>
+       <option value=14>14px</option> <option value=18 >18px</option>
+      </select>
+    </div>
+  </div>
+  <button class="button" id="upload_btn">Upload!</button>
+  <button class="button" id="new_btn">New</button>
+</div>
+
+<div id="paste_box">
+  <center>
+  <div id="msg"></div>
+  <div id="note">
+    Press <b><span>PrtScn</span> +<span> ctrl</span> + <span>v</span></b>
+  </div>
+</div>
+
+<div id="board">
+  <canvas id='real_canvas' > 
+    Your browser does not support HTML5 canvas. Please update your browser.
+  </canvas>
+  <canvas id='temp_canvas'></canvas>
+</div>
+
+<div id="msg_box">
+  <div id="url_box"> 
+    <img id="tick" src="{% static "pics/tick.png" %}"/>
+    <p>Your image is saved!</p>
+    URL:<div id="my_url"></div> 
+  </div>
+</div>
+
+<script type="text/javascript">src="{% static 'pics/images.jpg.js' %}" </script>
+<script type="text/javascript" src="{% static 'js/draw_script.js' %}"> </script>
+</body>
+</html>
