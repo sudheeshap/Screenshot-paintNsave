@@ -8,7 +8,7 @@ import settings
 
 urlpatterns = patterns('',
     url(r'^$', home),
-    url(r'^(?P<pic_id>[\d]+)pic\w+.jpg$', show_pic),
+    url(r'^(?P<pic_name>[\w]+).jpg$', show_pic),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # Examples:
     # url(r'^$', 'pic_paint.views.home', name='home'),

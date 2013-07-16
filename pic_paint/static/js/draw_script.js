@@ -9,11 +9,11 @@ colors = ['#000000', '#ff0000', '#ff7f00', '#ffff00',
           '#ffffff', '#008800', '#0000ff', '#8b00ff'];
 
 $(document).ready(function(){
+  var name = make_text().replace(/\s+/g, "");
   $("#upload_btn").click(function(){
-    $.post("/", {img: board.toDataURL("image/jpeg")}, function(data, status){
+    $.post("/", {fname: name, img: board.toDataURL("image/jpeg")}, function(data, status){
       if(status) {
-        pic_name = ("http://paintonit.herokuapp.com/" + data + 
-                   "pic" + make_text() + ".jpg").replace(" ", "");
+        pic_name = "http://paintonit.herokuapp.com/" + data + ".jpg";
         $("#my_url").append($("<a href=" + pic_name + ">" + pic_name + "</a>"));
         $("#msg_box").bPopup();//Shows the saved URL.
       }
@@ -88,8 +88,8 @@ $(document).ready(function(){
   tmp_board.onmousedown = function(e) {
         attributes();
         hold = true;
-        x = e.layerX - this.offsetLeft;
-        y = e.layerY -this.offsetTop;
+        x = e.layerX - this.offsetLeft + 25;
+        y = e.layerY - this.offsetTop + 20;
         begin_x = x;
         begin_y = y;
         tmp_ctx.beginPath();
@@ -101,8 +101,8 @@ $(document).ready(function(){
           return;
         }
         if(hold){
-          x = e.layerX - this.offsetLeft;
-          y = e.layerY - this.offsetTop;
+          x = e.layerX - this.offsetLeft + 25;
+          y = e.layerY - this.offsetTop + 20;
           goDraw();
         }
   }
@@ -204,7 +204,7 @@ $(document).ready(function(){
     var text = "";
     var source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcde\
                   fghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 5; i++ )
+    for( var i=0; i < 8; i++ )
       text += source.charAt(Math.floor(Math.random() * source.length));
     return text;
   }  
