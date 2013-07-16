@@ -12,7 +12,8 @@ $(document).ready(function(){
   $("#upload_btn").click(function(){
     $.post("/", {img: board.toDataURL("image/jpeg")}, function(data, status){
       if(status) {
-        pic_name = "http://paintonit.herokuapp.com/" + data + "pic" + make_text() + ".jpg";
+        pic_name = ("http://paintonit.herokuapp.com/" + data + 
+                   "pic" + make_text() + ".jpg").replace(" ", "");
         $("#my_url").append($("<a href=" + pic_name + ">" + pic_name + "</a>"));
         $("#msg_box").bPopup();//Shows the saved URL.
       }
