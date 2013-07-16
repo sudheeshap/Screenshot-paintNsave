@@ -12,7 +12,7 @@ $(document).ready(function(){
   $("#upload_btn").click(function(){
     $.post("/", {img: board.toDataURL("image/jpeg")}, function(data, status){
       if(status) {
-        pic_name = "http://127.0.0.1:8000/pic" + data + ".jpg";
+        pic_name = "http://127.0.0.1:8000/" + data + "pic" + make_text() + ".jpg";
         $("#my_url").append($("<a href=" + pic_name + ">" + pic_name + "</a>"));
         $("#msg_box").bPopup();//Shows the saved URL.
       }
@@ -23,6 +23,7 @@ $(document).ready(function(){
   document.onpaste = function(){
     var source;
     var items = event.clipboardData.items;
+    $("#msg").show();
     if(items.length > 0){  //If there is data in clipboard.
       if(!(items[0].type.match(/^image/))) {//If clipboard data is not an image.
         $("#msg").text("Press the PrtScn key first!"); 
@@ -55,7 +56,8 @@ $(document).ready(function(){
     tmp_ctx.clearRect(0, 0, screen.width, screen.height);
     $("#tool_box").hide();
     $("#real_canvas").hide();
-     $("#temp_canvas").hide();
+    $("#temp_canvas").hide();
+    $("#msg").hide();
     $("#paste_box").show();
     tool = '';
     
@@ -152,9 +154,9 @@ $(document).ready(function(){
     tmp_ctx.stroke();
     begin_x = x;
     begin_y = y;
-}
+  }
 
-function goDraw(){
+  function goDraw(){
     if (tool == 'pencil'){
       brush();  
     }
@@ -184,7 +186,7 @@ function goDraw(){
         return;   
       tmp_ctx.clearRect(0, 0, b_width, b_height);
       tmp_ctx.beginPath();
-      tmp_ctx.arc(begin_x, begin_y, Math.abs(x-begin_x), 0 , 2 * Math.PI, false);
+      tmp_ctx.arc(begin_x, begin_y, Math.abs(x-begin_x),0 ,2 * Math.PI, false);
       if(stroke) 
         tmp_ctx.stroke();
       if(fill) 
@@ -196,6 +198,14 @@ function goDraw(){
       brush();  
       tmp_ctx.strokeStyle = '#000000';
     }
+  } 
+  function make_text(){
+    var text = "";
+    var source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcde\
+                  fghijklmnopqrstuvwxyz0123456789";
+    for( var i=0; i < 5; i++ )
+      text += source.charAt(Math.floor(Math.random() * source.length));
+    return text;
   }  
 });
 

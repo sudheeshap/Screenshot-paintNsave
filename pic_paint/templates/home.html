@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Paint it!</title>
+<title>{% block title %}Paint it!{% endblock %}</title>
 {% load static %} 
 <link rel='stylesheet' type='text/css' href="{% static 'css/styles.css' %}">
 <script type="text/javascript" src= "{% static 'js/jquery_min.js' %}"> </script>
 <script type="text/javascript" src= "{% static 'js/bpopup_min.js' %}"> </script>
 </head>
 <body>
+{% block content %}
 <div id="tool_box">
   <div id="drw_tools">
     <button id="line" class="btns" title="Line">
@@ -63,5 +64,7 @@
 
 <script type="text/javascript">src="{% static 'pics/images.jpg.js' %}" </script>
 <script type="text/javascript" src="{% static 'js/draw_script.js' %}"> </script>
+{% endblock %}
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from paint_it.views import * 
+import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -7,7 +8,8 @@ from paint_it.views import *
 
 urlpatterns = patterns('',
     url(r'^$', home),
-    url(r'^pic(?P<pic_id>[\d]+).jpg$', show_pic),
+    url(r'^(?P<pic_id>[\d]+)pic\w+.jpg$', show_pic),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # Examples:
     # url(r'^$', 'pic_paint.views.home', name='home'),
     # url(r'^pic_paint/', include('pic_paint.foo.urls')),

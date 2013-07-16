@@ -65,6 +65,14 @@ a:hover {color:#aabbcc;}
   border-top-color: #88c21b;
   background: #88c21b;
 }
+.pg_error{
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  vertical-align: middle;
+  text-align: center; 
+  color: #fff;
+}
 #tool_box{
   display: none;
   position: relative;
@@ -154,7 +162,7 @@ a:hover {color:#aabbcc;}
   height: 125px;
 }
 #my_url{
-  font-size: 30px;
+  font-size: 20px;
 }
 #upload_btn, #new_btn{
   float: right;
