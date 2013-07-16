@@ -2,16 +2,15 @@ var board = document.getElementById("real_canvas");
 var tmp_board = document.getElementById("temp_canvas");
 var b_width = screen.width, b_height = screen.height;
 var ctx = board.getContext("2d"), tmp_ctx = tmp_board.getContext("2d");
-var x, y, saved = false, hold = false, fill = false, stroke = true, tool;
+var x, y, hold = false, fill = false, stroke = true, tool;
 tmp_ctx.lineCap = 'round';
 ctx.lineCap = 'round';
 colors = ['#000000', '#ff0000', '#ff7f00', '#ffff00', 
           '#ffffff', '#008800', '#0000ff', '#8b00ff'];
 
 $(document).ready(function(){
-  var name = make_text().replace(/\s+/g, "");
   $("#upload_btn").click(function(){
-    $.post("/", {fname: name, img: board.toDataURL("image/jpeg")}, function(data, status){
+    $.post("/", {img: board.toDataURL("image/jpeg")}, function(data, status){
       if(status) {
         pic_name = "http://paintonit.herokuapp.com/" + data + ".jpg";
         $("#my_url").append($("<a href=" + pic_name + ">" + pic_name + "</a>"));
@@ -53,6 +52,8 @@ $(document).ready(function(){
   };
 
   $("#new_btn").click(function(){
+    $('#fill').attr('checked', false);
+    $('#thick').val(12);
     ctx.clearRect(0, 0, screen.width, screen.height);
     tmp_ctx.clearRect(0, 0, screen.width, screen.height);
     $("#tool_box").hide();
@@ -129,9 +130,7 @@ $(document).ready(function(){
       stroke = false;
   }
 
-  function thickness(){
-    tmp_ctx.lineWidth = $("#thick").val();
-  }
+  function thickness(){ tmp_ctx.lineWidth = $("#thick").val(); }
 
   function clears(){
     ctx.clearRect(0, 0, b_width, b_height);
@@ -200,13 +199,5 @@ $(document).ready(function(){
       tmp_ctx.strokeStyle = '#000000';
     }
   } 
-  function make_text(){
-    var text = "";
-    var source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcde\
-                  fghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 8; i++ )
-      text += source.charAt(Math.floor(Math.random() * source.length));
-    return text;
-  }  
 });
 
